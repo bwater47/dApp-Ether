@@ -16,6 +16,8 @@ import {
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import MainLayout from "../layout/mainLayout";
+// import { Core } from '@walletconnect/core'
+// import { WalletKit } from '@reown/walletkit'
 
 const { chains, provider } = configureChains(
 	[
@@ -33,6 +35,7 @@ const { chains, provider } = configureChains(
 
 const { connectors } = getDefaultWallets({
 	appName: "My Alchemy DApp",
+	projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_ID,
 	chains,
 });
 
@@ -42,8 +45,30 @@ const wagmiClient = createClient({
 	provider,
 });
 
+// const core = new Core({
+// 	projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_ID
+//   });
+
+// const metadata = {
+// 	name: 'dApp-Ether',
+// 	description: 'AppKit Example',
+// 	url: window.location.origin,
+// 	icons: ['your-icon-url']
+//   };
+
 export { WagmiConfig, RainbowKitProvider };
 function MyApp({ Component, pageProps }) {
+
+	// useEffect(() => {
+	// 	const initWalletKit = async () => {
+	// 		const walletKit = await WalletKit.init({
+	// 			core,
+	// 			metadata
+	// 		});
+	// 	};
+	// 	initWalletKit();
+	// }, []);
+
 	return (
 		<WagmiConfig client={wagmiClient}>
 			<RainbowKitProvider
